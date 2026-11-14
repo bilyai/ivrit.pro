@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>IVRIT PRO — Академія івриту</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rubik:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-light: #e0f2fe;
+            --bg: #ffffff;
+            --card: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+            --error: #dc2626;
+        }
+
+        [data-theme="dark"] {
+            --primary: #38bdf8;
+            --primary-light: #0369a1;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            padding-bottom: 90px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        header {
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .logo { font-size: 18px; font-weight: 700; color: var(--primary); }
+        .theme-btn { background: none; border: none; font-size: 20px; cursor: pointer; }
+
+        .container { padding: 16px; max-width: 600px; margin: 0 auto; }
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        .header-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .lesson-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .lesson-item:active { transform: scale(0.98); }
+        .lesson-num {
+            width: 38px; height: 38px; border-radius: 10px;
+            background: var(--primary-light); color: var(--primary);
+            font-weight: 700; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+        .lesson-item.done .lesson-num { background: rgba(22, 163, 74, 0.15); color: var(--success); }
+        .lesson-info { flex: 1; }
+        .lesson-info h3 { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .lesson-info p { font-size: 12px; color: var(--text-muted); }
+
+        .lesson-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .back-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); width: 38px; height: 38px; border-radius: 10px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+        .section-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .section-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+        .theory-text { font-size: 14px; line-height: 1.6; color: var(--text); }
+
+        .row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            gap: 10px;
+        }
+        .row-item:last-child { border-bottom: none; }
+        .row-left { flex: 1; }
+        .row-ua { font-size: 14px; font-weight: 600; }
+        .row-tr { font-size: 12px; color: var(--text-muted); }
+        .row-right { text-align: right; }
+        .hebrew-word { font-family: 'Rubik', sans-serif; font-size: 19px; font-weight: 700; color: var(--primary); direction: rtl; }
+        
+        .audio-btn {
+            background: var(--primary-light); color: var(--primary); border: none;
+            padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+            cursor: pointer; margin-top: 4px; display: inline-block;
+        }
+
+        .btn-main {
+            width: 100%; background: var(--primary); color: white; border: none;
+            padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 10px;
+        }
+        
+        .quiz-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+        }
+        .quiz-opt {
+            background: var(--card); color: var(--text); border: 1px solid var(--border);
+            text-align: left; padding: 11px; border-radius: 8px; margin-top: 6px; width: 100%; font-size: 13px; cursor: pointer; font-weight: 500;
+        }
+
+        nav {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--card);
+            border-top: 1px solid var(--border); display: flex; justify-content: space-around;
+            padding: 10px 0; z-index: 100;
+        }
+        .nav-item { text-align: center; color: var(--text-muted); font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }
+        .nav-item.active { color: var(--primary); }
+        .nav-icon { font-size: 20px; margin-bottom: 2px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">IVRIT PRO (90 хв)</div>
+        <button class="theme-btn" onclick="toggleTheme()" id="theme-icon">🌙</button>
+    </header>
+
+    <div class="container">
+        <!-- ЕКРАН 1: УРОКИ -->
+        <div id="screen-lessons" class="screen active">
+            <div id="lessons-home">
+                <div class="header-title">Академічний курс (30 уроків)</div>
+                <div id="lessons-list"></div>
+            </div>
+
+            <!-- ДЕТАЛІ УРОКУ -->
+            <div id="lesson-detail" style="display: none;">
+                <div class="lesson-header">
+                    <button class="back-btn" onclick="closeLesson()">←</button>
+                    <div>
+                        <div style="font-size: 11px; color: var(--primary); font-weight: 700;" id="det-num">УРОК 1</div>
+                        <h2 style="font-size: 16px; font-weight: 700;" id="det-title">Назва</h2>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">📖 Блок 1: Граматична теорія (20 хв)</div>
+                    <div class="theory-text" id="det-theory"></div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">💬 Блок 2: Розгорнутий діалог (15 хв)</div>
+                    <div id="det-dialogue"></div>
+                </div>
+
+                <div class="section-box">
+                    <div class="section-title">📚 Блок 3: Лексика — 20 слів (20 хв)</div>
+                    <div id="det-words"></div>
+                </div>
+
+                <div class="section-box" style="border-color: var(--primary);">
+                    <div class="section-title">🎯 Блок 4: Практикум — 20 питань (35 хв)</div>
+                    <div id="lesson-quiz"></div>
+                </div>
+
+                <button class="btn-main" onclick="markDone()">✅ Завершити 90-хвилинне заняття</button>
+                <button class="btn-main" style="background:var(--card); color:var(--text); border:1px solid var(--border);" onclick="closeLesson()">Назад до списку</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- НАВІГАЦІЯ -->
+    <nav>
+        <div class="nav-item active" onclick="switchTab('lessons', this)"><div class="nav-icon">📚</div>Уроки</div>
+    </nav>
+
+    <!-- Підключаємо базу даних уроків -->
+    <script src="lessons-data.js"></script>
+    <script>
+        function toggleTheme() {
+            const isDark = document.body.getAttribute('data-theme') === 'dark';
+            document.body.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-icon').innerText = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('theme-icon').innerText = '☀️';
+        }
+
+        let completed = JSON.parse(localStorage.getItem('done') || '[]');
+
+        function renderLessons() {
+            const list = document.getElementById('lessons-list');
+            list.innerHTML = '';
+            for(let id = 1; id <= 30; id++) {
+                let l = lessonsData[id];
+                const isDone = completed.includes(id);
+                list.innerHTML += `
+                    <div class="lesson-item ${isDone ? 'done' : ''}" onclick="openLesson(${id})">
+                        <div class="lesson-num">${isDone ? '✓' : id}</div>
+                        <div class="lesson-info">
+                            <h3>${id}. ${l.title}</h3>
+                            <p>${isDone ? 'Пройдено (90 хв)' : '90 хв • 20 слів • 20 питань'}</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function openLesson(id) {
+            document.getElementById('lessons-home').style.display = 'none';
+            document.getElementById('lesson-detail').style.display = 'block';
+            const l = lessonsData[id];
+            
+            document.getElementById('det-num').innerText = `УРОК ${id} З 30`;
+            document.getElementById('det-title').innerText = l.title;
+            document.getElementById('det-theory').innerHTML = l.theory;
+
+            // Діалог
+            document.getElementById('det-dialogue').innerHTML = l.dialogue.map(d => `
+                <div style="margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);">
+                    <div style="font-size: 11px; font-weight: 700; color: var(--primary);">${d.sp}:</div>
+                    <div class="row-ua">${d.ua}</div>
+                    <div class="row-tr">читання: [ ${d.tr} ]</div>
+                    <div class="hebrew-word" style="font-size: 18px; margin-top: 2px;">${d.he}</div>
+                    <button class="audio-btn" onclick="speak('${d.he}')">🔊 Слухати</button>
+                </div>
+            `).join('');
+
+            // Слова (20 штук)
+            document.getElementById('det-words').innerHTML = l.words.map(w => `
+                <div class="row-item">
+                    <div class="row-left">
+                        <div class="row-ua">${w.ua}</div>
+                        <div class="row-tr">[ ${w.tr} ]</div>
+                    </div>
+                    <div class="row-right">
+                        <div class="hebrew-word">${w.he}</div>
+                        <button class="audio-btn" onclick="speak('${w.he}')">🔊</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // 20 унікальних питань з повними перекладами
+            document.getElementById('lesson-quiz').innerHTML = l.quiz.map((q, qIdx) => `
+                <div class="quiz-card">
+                    <div style="font-weight: 600; font-size: 13px; margin-bottom: 4px;">Питання ${qIdx + 1}: ${q.ua}</div>
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 2px;">Читання: [ ${q.tr} ]</div>
+                    <div class="hebrew-word" style="font-size: 17px; margin-bottom: 8px;">${q.heb}</div>
+                    <div>
+                        ${q.opts.map((opt, oIdx) => `
+                            <button class="quiz-opt" onclick="checkAns(this, ${oIdx}, ${q.cor})">${opt}</button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            window.currentId = id;
+            window.scrollTo(0, 0);
+        }
+
+        function checkAns(btn, sel, cor) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.quiz-opt').forEach(b => b.style.borderColor = 'var(--border)');
+            if(sel === cor) {
+                btn.style.borderColor = 'var(--success)';
+                btn.style.background = 'rgba(22, 163, 74, 0.15)';
+            } else {
+                btn.style.borderColor = 'var(--error)';
+                btn.style.background = 'rgba(220, 38, 38, 0.15)';
+            }
+        }
+
+        function closeLesson() {
+            document.getElementById('lesson-detail').style.display = 'none';
+            document.getElementById('lessons-home').style.display = 'block';
+            renderLessons();
+        }
+
+        function markDone() {
+            if(!completed.includes(window.currentId)) {
+                completed.push(window.currentId);
+                localStorage.setItem('done', JSON.stringify(completed));
+            }
+            alert("Вітаю! Заняття на 90 хвилин зафіксовано як пройдено!");
+            closeLesson();
+        }
+
+        function speak(text) {
+            if('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const u = new SpeechSynthesisUtterance(text);
+                u.lang = 'he-IL';
+                window.speechSynthesis.speak(u);
+            }
+        }
+
+        renderLessons();
+    </script>
+</body>
+</html>
