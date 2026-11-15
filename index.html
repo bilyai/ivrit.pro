@@ -1,345 +1,172 @@
 <!DOCTYPE html>
-<html lang="uk" dir="ltr">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IVRIT PRO — Єврейська академія івриту</title>
-    <!-- Підключаємо сучасний та єврейський шрифтові стилі через Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <title>IVRIT PRO — Вивчення івриту</title>
     <style>
         :root {
-            --jewish-blue: #0038b8;      /* Класичний синій кольору таліта і прапора */
-            --jewish-gold: #c69214;      /* Насичене єврейське золото / пісок Іерусалима */
-            --bg-pergamum: #fcf9f2;      /* Теплий пергаментний фон */
-            --text-main: #2c3e50;
-            --card-bg: #ffffff;
+            --jewish-blue: #0038b8;
+            --jewish-gold: #c69214;
+            --bg-color: #fcf9f2;
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Assistant', sans-serif;
-            background-color: var(--bg-pergamum);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 40px;
+            font-family: Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
-        /* Шапка з традиційним синьо-золотим оформленням */
         header {
             background: linear-gradient(135deg, #00227a, var(--jewish-blue));
             color: white;
-            padding: 30px 20px;
             text-align: center;
-            border-bottom: 6px solid var(--jewish-gold);
-            border-radius: 0 0 24px 24px;
-            box-shadow: 0 6px 20px rgba(0, 56, 184, 0.25);
-            position: relative;
+            padding: 30px 20px;
+            border-bottom: 5px solid var(--jewish-gold);
+            border-radius: 0 0 20px 20px;
         }
 
-        header h1 { 
-            font-size: 2.2rem; 
-            letter-spacing: 2px; 
-            margin-bottom: 5px; 
-            font-weight: 700;
-        }
-        
-        header p { 
-            font-size: 1.1rem; 
-            opacity: 0.95; 
-            letter-spacing: 0.5px;
+        .star-symbol {
+            font-size: 28px;
+            color: var(--jewish-gold);
+            margin-bottom: 5px;
         }
 
-        /* Символ Зірки Давида у шапці */
-        .header-symbol { 
-            font-size: 28px; 
-            color: var(--jewish-gold); 
-            margin-bottom: 8px; 
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        h1 {
+            margin: 5px 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
 
-        .container { max-width: 800px; margin: 30px auto; padding: 0 15px; }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 15px;
+        }
 
-        /* Картки уроків у вигляді єврейських манускриптів / рамок */
         .lesson-card {
-            background: var(--card-bg);
+            background: #ffffff;
             border: 2px solid var(--jewish-gold);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 22px;
-            box-shadow: 0 4px 15px rgba(198, 146, 20, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(198, 146, 20, 0.1);
             position: relative;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .lesson-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 56, 184, 0.15);
-        }
-
-        /* Зірка Давида у кутку кожної картки */
-        .lesson-card::before {
+        .lesson-card::after {
             content: "✡";
             position: absolute;
-            top: 18px;
+            top: 15px;
             right: 20px;
             color: var(--jewish-blue);
             font-size: 22px;
-            opacity: 0.9;
         }
 
-        .lesson-card h2 { 
-            font-size: 1.35rem; 
-            color: var(--jewish-blue); 
-            margin-bottom: 6px; 
-            padding-right: 30px; 
+        .lesson-card h2 {
+            color: var(--jewish-blue);
+            font-size: 1.3rem;
+            margin-top: 0;
         }
-        
-        .hebrew-sub { 
-            font-size: 1.25rem; 
-            font-weight: 700; 
-            color: var(--jewish-gold); 
-            margin-bottom: 12px; 
-            direction: rtl; 
-            text-align: right; 
+
+        .hebrew-title {
+            font-size: 1.2rem;
+            color: var(--jewish-gold);
+            font-weight: bold;
+            direction: rtl;
+            text-align: right;
+            margin-bottom: 10px;
         }
-        
+
         .btn {
             background-color: var(--jewish-blue);
             color: white;
             border: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-family: 'Assistant', sans-serif;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            display: inline-block;
+            font-size: 1rem;
             text-decoration: none;
-            margin-top: 12px;
-            font-weight: 600;
-            box-shadow: 0 3px 8px rgba(0, 56, 184, 0.2);
-            transition: background 0.2s;
-        }
-        .btn:hover { background-color: #002a8c; }
-        .btn-gold { background-color: var(--jewish-gold); color: #fff; }
-        .btn-gold:hover { background-color: #b08110; }
-
-        /* Внутрішні блоки відкритого уроку */
-        .section-box {
-            background: var(--card-bg);
-            border: 2px solid var(--jewish-gold);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 22px;
-            box-shadow: 0 4px 15px rgba(198, 146, 20, 0.1);
-        }
-        
-        .section-title {
-            color: var(--jewish-blue);
-            border-bottom: 2px solid var(--jewish-gold);
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-size: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .theory-item { 
-            margin-bottom: 12px; 
-            padding-left: 12px; 
-            border-left: 4px solid var(--jewish-blue); 
-            font-size: 1rem; 
-        }
-        
-        .dialogue-pair {
-            background: #fdfbf7;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            border-left: 4px solid var(--jewish-gold);
-            border-top: 1px solid #f0e6d2;
-            border-right: 1px solid #f0e6d2;
-            border-bottom: 1px solid #f0e6d2;
-        }
-        
-        .he-text { 
-            font-size: 1.2rem; 
-            font-weight: 700; 
-            color: var(--jewish-blue); 
-            direction: rtl; 
-            text-align: right; 
-        }
-        
-        .tr-text { 
-            font-style: italic; 
-            color: #555; 
-            font-size: 0.95rem; 
+            display: inline-block;
+            margin-top: 10px;
         }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 1rem; }
-        th, td { border: 1px solid #e6dcc6; padding: 10px; text-align: left; }
-        th { background-color: var(--jewish-blue); color: white; }
-        td.he-cell { font-weight: bold; color: var(--jewish-blue); direction: rtl; text-align: right; font-size: 1.15rem; }
-
-        .quiz-item { margin-bottom: 18px; padding-bottom: 15px; border-bottom: 1px dashed #e6dcc6; }
-        
-        .quiz-opt {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 10px 14px;
-            margin: 6px 0;
-            border: 1px solid #d4c5a9;
-            border-radius: 8px;
-            background: #fff;
-            cursor: pointer;
-            font-family: 'Assistant', sans-serif;
-            font-size: 1rem;
-            transition: all 0.2s;
+        .btn:hover {
+            background-color: #002a8c;
         }
-        .quiz-opt:hover { background: #f4f1ea; border-color: var(--jewish-blue); }
-        .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; font-weight: bold; }
-        .quiz-opt.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
 
-        footer { text-align: center; margin-top: 40px; color: #8c7b60; font-size: 0.9rem; }
+        footer {
+            text-align: center;
+            color: #777;
+            margin-top: 40px;
+            font-size: 0.9rem;
+            padding-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-symbol">✡</div>
+        <div class="star-symbol">✡</div>
         <h1>IVRIT PRO</h1>
-        <p>Єврейський академічний курс івриту</p>
+        <p>Інтерактивний академічний курс івриту</p>
     </header>
 
-    <div class="container" id="app-container">
-        <!-- Уроки завантажаться автоматично -->
+    <div class="container" id="lessons-list">
+        <!-- Урок 1 -->
+        <div class="lesson-card">
+            <h2>Урок 1</h2>
+            <div class="hebrew-title">שיעור ראשון</div>
+            <p>Базові букви, правила читання та перші слова.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
+
+        <!-- Урок 2 -->
+        <div class="lesson-card">
+            <h2>Урок 2</h2>
+            <div class="hebrew-title">שיעור שני</div>
+            <p>Продовження вивчення алфавіту та огласовки.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
+
+        <!-- Урок 3 -->
+        <div class="lesson-card">
+            <h2>Урок 3</h2>
+            <div class="hebrew-title">שיעור שלישי</div>
+            <p>Побудова простих фраз та привітання.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
+
+        <!-- Урок 4 -->
+        <div class="lesson-card">
+            <h2>Урок 4</h2>
+            <div class="hebrew-title">שיעור רביעי</div>
+            <p>Чоловічий та жіночий рід іменників.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
+
+        <!-- Урок 5 -->
+        <div class="lesson-card">
+            <h2>Урок 5</h2>
+            <div class="hebrew-title">גּוּפִים וּמִלּוֹת יַחַס</div>
+            <p>Особові займенники та злитні префікси-прийменники.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
+
+        <!-- Урок 6 -->
+        <div class="lesson-card">
+            <h2>Урок 6</h2>
+            <div class="hebrew-title">רְמִיזָה וּשְׁמוֹת תּוֹאַר</div>
+            <p>Вказівні займенники та узгодження прикметників.</p>
+            <a href="#" class="btn">Відкрити урок</a>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 IVRIT PRO. Усі права захищено.</p>
     </footer>
 
-    <!-- Підключення файлу з даними уроків (1-6) -->
-    <script src="data/lessons-data.js"></script>
-    <script>
-        const container = document.getElementById("app-container");
-
-        function renderCourseList() {
-            if (typeof ivritCourses === "undefined" || !Array.isArray(ivritCourses)) {
-                container.innerHTML = `
-                    <div class="section-box" style="color:red; text-align:center; padding: 20px;">
-                        Помилка: не вдалося завантажити <b>data/lessons-data.js</b>. Перевірте, чи лежить файл у папці <code>data</code> і чи закінчується він на <code>];</code>.
-                    </div>`;
-                return;
-            }
-
-            let html = "";
-            ivritCourses.forEach(lesson => {
-                let desc = (lesson.theory && lesson.theory[0]) 
-                    ? lesson.theory[0].replace(/\*\*/g, "") 
-                    : "Інтерактивний урок івриту: теорія, словник та тест.";
-
-                html += `
-                    <div class="lesson-card">
-                        <h2>${lesson.title}</h2>
-                        <div class="hebrew-sub">${lesson.hebrewTitle || ''}</div>
-                        <p style="margin-bottom: 12px; color: #444; font-size: 1rem;">${desc}</p>
-                        <button class="btn" onclick="openLesson(${lesson.id})">Відкрити урок</button>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-            window.scrollTo(0, 0);
-        }
-
-        function openLesson(id) {
-            const lesson = ivritCourses.find(l => l.id === id);
-            if (!lesson) return;
-
-            let theoryHtml = (lesson.theory || []).map(p => `<div class="theory-item">${p}</div>`).join("");
-            
-            let dialoguesHtml = (lesson.dialogues || []).map(d => `
-                <div class="dialogue-pair">
-                    <div class="he-text">${d.speaker1}</div>
-                    <div class="tr-text">${d.trans1} — <b>${d.translat1}</b></div>
-                    <hr style="margin: 6px 0; border: 0; border-top: 1px dashed #d4c5a9;">
-                    <div class="he-text">${d.speaker2}</div>
-                    <div class="tr-text">${d.trans2} — <b>${d.translat2}</b></div>
-                </div>
-            `).join("");
-
-            let vocabHtml = (lesson.vocabulary || []).map(v => `
-                <tr>
-                    <td class="he-cell">${v.he}</td>
-                    <td><i>${v.tr}</i></td>
-                    <td>${v.uk}</td>
-                </tr>
-            `).join("");
-
-            let quizHtml = (lesson.quiz || []).map((q, qIdx) => {
-                let opts = q.options.map((opt, oIdx) => 
-                    `<button class="quiz-opt" onclick="checkAnswer(this, ${oIdx === q.correct})">${opt}</button>`
-                ).join("");
-                return `
-                    <div class="quiz-item">
-                        <p><b>${qIdx + 1}. ${q.question}</b></p>
-                        ${q.hebrew ? `<p class="he-text" style="font-size:1.1rem; margin: 6px 0;">${q.hebrew}</p>` : ""}
-                        <div style="margin-top: 8px;">${opts}</div>
-                    </div>
-                `;
-            }).join("");
-
-            container.innerHTML = `
-                <button class="btn btn-gold" onclick="renderCourseList()" style="margin-bottom: 20px;">← Назад до всіх уроків</button>
-
-                <div class="lesson-card">
-                    <h2>${lesson.title}</h2>
-                    <div class="hebrew-sub">${lesson.hebrewTitle || ''}</div>
-                    <p style="font-size: 0.95rem; color: #666;">⏱ Тривалість: ${lesson.duration || '90 хвилин'}</p>
-                </div>
-
-                <div class="section-box">
-                    <h3 class="section-title">✡ Теорія та граматика</h3>
-                    ${theoryHtml}
-                </div>
-
-                <div class="section-box">
-                    <h3 class="section-title">💬 Діалоги</h3>
-                    ${dialoguesHtml}
-                </div>
-
-                <div class="section-box">
-                    <h3 class="section-title">📖 Словник уроку</h3>
-                    <table>
-                        <thead><tr><th>Іврит</th><th>Транскрипція</th><th>Переклад</th></tr></thead>
-                        <tbody>${vocabHtml}</tbody>
-                    </table>
-                </div>
-
-                <div class="section-box">
-                    <h3 class="section-title">🧠 Контрольний тест</h3>
-                    ${quizHtml}
-                </div>
-
-                <button class="btn btn-gold" onclick="renderCourseList()" style="width: 100%; text-align: center; margin-top: 10px;">← Назад до всіх уроків</button>
-            `;
-            window.scrollTo(0, 0);
-        }
-
-        function checkAnswer(btn, isCorrect) {
-            const parent = btn.parentElement;
-            parent.querySelectorAll(".quiz-opt").forEach(b => b.disabled = true);
-            if (isCorrect) {
-                btn.classList.add("correct");
-            } else {
-                btn.classList.add("wrong", "shake");
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", renderCourseList);
-    </script>
 </body>
 </html>
