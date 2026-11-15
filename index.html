@@ -31,7 +31,6 @@
             padding-bottom: 50px;
         }
 
-        /* Шапка в стиле талита с золотым орнаментом и менорой */
         header {
             background: linear-gradient(160deg, var(--jewish-dark-blue) 0%, var(--jewish-blue) 60%, #0047e0 100%);
             color: white;
@@ -43,7 +42,6 @@
             overflow: hidden;
         }
 
-        /* Декоративные полосы талита сверху и снизу */
         header::before {
             content: "";
             display: block;
@@ -98,7 +96,6 @@
             padding: 0 15px;
         }
 
-        /* Карточки уроков с двойной золотой рамкой */
         .lesson-card {
             background: var(--card-bg);
             border: 2px solid var(--jewish-gold);
@@ -151,6 +148,7 @@
             display: inline-block;
             margin-top: 12px;
             box-shadow: 0 4px 10px rgba(0, 56, 184, 0.25);
+            text-decoration: none;
         }
 
         .btn:active { transform: scale(0.98); }
@@ -161,7 +159,6 @@
             border: none;
         }
 
-        /* Кнопка голосовой озвучки */
         .audio-btn {
             background: #eef3ff;
             border: 1.5px solid var(--jewish-blue);
@@ -340,7 +337,6 @@
     <script>
         const container = document.getElementById("app-container");
 
-        // Функція голосової озвучки івриту
         function speakHebrew(text) {
             if (!('speechSynthesis' in window)) {
                 alert("Ваш браузер не підтримує голосове озвучення.");
