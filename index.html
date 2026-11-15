@@ -97,6 +97,37 @@
             background-color: #002a8c;
         }
 
+        .btn-gold {
+            background-color: var(--jewish-gold);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Стилі для відкритого вмісту уроку */
+        .lesson-content-box {
+            background: #ffffff;
+            border: 2px solid var(--jewish-gold);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(198, 146, 20, 0.1);
+        }
+
+        .section-title {
+            color: var(--jewish-blue);
+            border-bottom: 2px solid var(--jewish-gold);
+            padding-bottom: 6px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .theory-p {
+            margin-bottom: 10px;
+            padding-left: 10px;
+            border-left: 3px solid var(--jewish-blue);
+        }
+
         footer {
             text-align: center;
             color: #777;
@@ -114,59 +145,121 @@
         <p>Інтерактивний академічний курс івриту</p>
     </header>
 
-    <div class="container" id="lessons-list">
-        <!-- Урок 1 -->
-        <div class="lesson-card">
-            <h2>Урок 1</h2>
-            <div class="hebrew-title">שיעור ראשון</div>
-            <p>Базові букви, правила читання та перші слова.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
-
-        <!-- Урок 2 -->
-        <div class="lesson-card">
-            <h2>Урок 2</h2>
-            <div class="hebrew-title">שיעור שני</div>
-            <p>Продовження вивчення алфавіту та огласовки.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
-
-        <!-- Урок 3 -->
-        <div class="lesson-card">
-            <h2>Урок 3</h2>
-            <div class="hebrew-title">שיעור שלישי</div>
-            <p>Побудова простих фраз та привітання.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
-
-        <!-- Урок 4 -->
-        <div class="lesson-card">
-            <h2>Урок 4</h2>
-            <div class="hebrew-title">שיעור רביעי</div>
-            <p>Чоловічий та жіночий рід іменників.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
-
-        <!-- Урок 5 -->
-        <div class="lesson-card">
-            <h2>Урок 5</h2>
-            <div class="hebrew-title">גּוּפִים וּמִלּוֹת יַחַס</div>
-            <p>Особові займенники та злитні префікси-прийменники.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
-
-        <!-- Урок 6 -->
-        <div class="lesson-card">
-            <h2>Урок 6</h2>
-            <div class="hebrew-title">רְמִיזָה וּשְׁמוֹת תּוֹאַר</div>
-            <p>Вказівні займенники та узгодження прикметників.</p>
-            <a href="#" class="btn">Відкрити урок</a>
-        </div>
+    <div class="container" id="app-container">
+        <!-- Сюди динамічно завантажуватиметься список або зміст уроку -->
     </div>
 
     <footer>
         <p>&copy; 2026 IVRIT PRO. Усі права захищено.</p>
     </footer>
 
+    <!-- База даних усіх 6 уроків прямо всередині сайту, щоб нічого не злітало -->
+    <script>
+        const lessonsData = [
+            {
+                id: 1,
+                title: "Урок 1",
+                hebrewTitle: "שיעור ראשון",
+                desc: "Базові букви, правила читання та перші слова.",
+                theory: [
+                    "Знайомство з алфавітом івриту.",
+                    "Правила читання справа наліво та особливості голосних (огласовок)."
+                ]
+            },
+            {
+                id: 2,
+                title: "Урок 2",
+                hebrewTitle: "שיעור שני",
+                desc: "Продовження вивчення алфавіту та огласовки.",
+                theory: [
+                    "Вивчення наступної групи літер івриту.",
+                    "Практика читання складів та простих слів."
+                ]
+            },
+            {
+                id: 3,
+                title: "Урок 3",
+                hebrewTitle: "שיעור שלישי",
+                desc: "Побудова простих фраз та привітання.",
+                theory: [
+                    "Поширені вітання на івриті (Шалом, Бoker tov тощо).",
+                    "Побудова найпростіших двоскладних речень."
+                ]
+            },
+            {
+                id: 4,
+                title: "Урок 4",
+                hebrewTitle: "שיעור רביעי",
+                desc: "Чоловічий та жіночий рід іменників.",
+                theory: [
+                    "Як визначати рід іменників в івриті.",
+                    "Закінчення однини чоловічого та жіночого роду (-а, -от, -ім)."
+                ]
+            },
+            {
+                id: 5,
+                title: "Урок 5",
+                hebrewTitle: "גּוּפִים וּמִלּוֹת יַחַס",
+                desc: "Особові займенники та злитні префікси-прийменники.",
+                theory: [
+                    "Особові займенники: ані (я), ата (ти), ху (він), хі (вона) тощо.",
+                    "Злитні префікси-прийменники (бе-, ле-, мі-)."
+                ]
+            },
+            {
+                id: 6,
+                title: "Урок 6",
+                hebrewTitle: "רְמִיזָה וּשְׁמוֹת תּוֹאַר",
+                desc: "Вказівні займенники та узгодження прикметників.",
+                theory: [
+                    "Вказівні займенники: зе (цей), зот (ця), еле (ці).",
+                    "Правила узгодження якісних прикметників з іменниками (наявність артикля 'ге-')."
+                ]
+            }
+        ];
+
+        const container = document.getElementById("app-container");
+
+        function renderList() {
+            let html = "";
+            lessonsData.forEach(lesson => {
+                html += `
+                    <div class="lesson-card">
+                        <h2>${lesson.title}</h2>
+                        <div class="hebrew-title">${lesson.hebrewTitle}</div>
+                        <p>${lesson.desc}</p>
+                        <button class="btn" onclick="openLesson(${lesson.id})">Відкрити урок</button>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        function openLesson(id) {
+            const lesson = lessonsData.find(l => l.id === id);
+            if (!lesson) return;
+
+            let theoryHtml = lesson.theory.map(t => `<div class="theory-p">${t}</div>`).join("");
+
+            container.innerHTML = `
+                <button class="btn btn-gold" onclick="renderList()" style="margin-bottom: 20px;">← Назад до списку уроків</button>
+                
+                <div class="lesson-content-box">
+                    <h2 style="color: var(--jewish-blue);">${lesson.title}: ${lesson.desc}</h2>
+                    <div class="hebrew-title" style="font-size: 1.4rem; margin-bottom: 20px;">${lesson.hebrewTitle}</div>
+                    
+                    <div class="section-title">✡ Теорія уроку</div>
+                    ${theoryHtml}
+                </div>
+
+                <button class="btn btn-gold" onclick="renderList()" style="width: 100%; text-align: center;">← Назад до списку уроків</button>
+            `;
+            window.scrollTo(0, 0);
+        }
+
+        // Запуск відображення при завантаженні сторінки
+        document.addEventListener("DOMContentLoaded", renderList);
+    </script>
 </body>
 </html>
