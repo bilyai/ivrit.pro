@@ -9,7 +9,7 @@ const ivritCourses = [
         id: 1,
         title: "Урок 1: Алфавіт та огласівки",
         hebrewTitle: "אַלֶף-בֵּית וְנִיקוּד",
-        duration: "90 хвилин",
+        duration:
         
         quote: {
             he: "שָׂפָה הִיא הַמַּפְתֵּחַ לְלֵב הָעָם",
