@@ -191,9 +191,8 @@
             box-shadow: 0 6px 20px rgba(198, 146, 20, 0.15);
         }
 
-        /* Блок цитати на уроці */
         .lesson-quote-box {
-            background: #fdf8ee;
+            background: #faf4e6;
             border: 1.5px solid var(--jewish-gold);
             border-radius: 10px;
             padding: 16px;
@@ -328,7 +327,7 @@
     <header>
         <div class="jewish-emblems">
             <span>✡</span>
-            <span>✡</span>
+            <span style="font-size: 32px; color: var(--jewish-light-gold);">🕎</span>
             <span>✡</span>
         </div>
         <h1>IVRIT PRO</h1>
@@ -339,7 +338,7 @@
     <div class="container" id="app-container"></div>
 
     <footer>
-        <div>✡ ✡ ✡</div>
+        <div>✡ 🕎 ✡</div>
         <p style="margin-top: 6px;">&copy; 2026 IVRIT PRO. Усі права захищено.</p>
     </footer>
 
@@ -402,7 +401,6 @@
 
             let theoryHtml = (lesson.theory || []).map(t => `<div class="theory-p">${t}</div>`).join("");
             
-            // Якщо у файлі уроку задана цитата — виводимо її красивим блоком
             let quoteHtml = "";
             if (lesson.quote) {
                 quoteHtml = `
@@ -412,7 +410,7 @@
                             <button class="audio-btn" title="Прослухати" onclick="speakHebrew('${escapeQuotes(lesson.quote.he)}')">🔊</button>
                             <div class="he-dialogue" style="font-size: 1.35rem;">${lesson.quote.he}</div>
                         </div>
-                        <div style="font-style: italic; color: #555; font-size: 0.95rem; text-align: right; margin-top: 6px; border-top: 1px dashed var(--border-tan); pt-1;">
+                        <div style="font-style: italic; color: #555; font-size: 0.95rem; text-align: right; margin-top: 6px; border-top: 1px dashed var(--border-tan); padding-top: 6px;">
                             ${lesson.quote.tr} — <b>${lesson.quote.uk}</b>
                         </div>
                     </div>
@@ -482,7 +480,7 @@
                 <div class="lesson-content-box">
                     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
                         <h2 style="color: var(--jewish-blue); margin-bottom: 5px; font-size: 1.5rem;">${lesson.title}</h2>
-                        <span style="font-size: 26px; color: var(--jewish-gold);">✡</span>
+                        <span style="font-size: 26px; color: var(--jewish-gold);">🕎</span>
                     </div>
                     <div class="hebrew-title" style="font-size: 1.5rem; margin-bottom: 6px;">${lesson.hebrewTitle || ''}</div>
                     <p style="color: #666; margin-bottom: 10px; font-weight: 600;">⏱ Тривалість: ${lesson.duration || '90 хвилин'}</p>
