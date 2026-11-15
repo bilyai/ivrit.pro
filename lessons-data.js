@@ -4,7 +4,8 @@ const ivritCourses = [
     id: 1,
     title: "УРОК1: Алфавіт та огласівки",
     hebrewTitle: "אֲלֶף-בֵּית וְנִקּוּד",
-    duration: "90 хвилин",const ivritCourses = [
+    duration: "90 хвилин",
+  
     {
         id: 1,
         title: "Урок 1: Алфавіт та огласівки",
