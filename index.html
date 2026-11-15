@@ -103,7 +103,6 @@
             font-weight: bold;
         }
 
-        /* Стилі для відкритого вмісту уроку */
         .lesson-content-box {
             background: #ffffff;
             border: 2px solid var(--jewish-gold);
@@ -117,7 +116,7 @@
             color: var(--jewish-blue);
             border-bottom: 2px solid var(--jewish-gold);
             padding-bottom: 6px;
-            margin-top: 20px;
+            margin-top: 25px;
             margin-bottom: 12px;
             font-size: 1.2rem;
         }
@@ -126,7 +125,69 @@
             margin-bottom: 10px;
             padding-left: 10px;
             border-left: 3px solid var(--jewish-blue);
+            line-height: 1.5;
         }
+
+        .dialogue-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--jewish-gold);
+        }
+
+        .he-dialogue {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--jewish-blue);
+            direction: rtl;
+            text-align: right;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--jewish-blue);
+            color: white;
+        }
+
+        td.he-col {
+            font-weight: bold;
+            color: var(--jewish-blue);
+            direction: rtl;
+            text-align: right;
+        }
+
+        .quiz-item {
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .quiz-opt {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 8px 12px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; font-weight: bold; }
+        .quiz-opt.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
 
         footer {
             text-align: center;
@@ -146,88 +207,32 @@
     </header>
 
     <div class="container" id="app-container">
-        <!-- Сюди динамічно завантажуватиметься список або зміст уроку -->
+        <!-- Список уроків завантажиться автоматично -->
     </div>
 
     <footer>
         <p>&copy; 2026 IVRIT PRO. Усі права захищено.</p>
     </footer>
 
-    <!-- База даних усіх 6 уроків прямо всередині сайту, щоб нічого не злітало -->
+    <!-- Підключаємо файл з твоїми уроками з кореня (без папки data) -->
+    <script src="lessons-data.js"></script>
     <script>
-        const lessonsData = [
-            {
-                id: 1,
-                title: "Урок 1",
-                hebrewTitle: "שיעור ראשון",
-                desc: "Базові букви, правила читання та перші слова.",
-                theory: [
-                    "Знайомство з алфавітом івриту.",
-                    "Правила читання справа наліво та особливості голосних (огласовок)."
-                ]
-            },
-            {
-                id: 2,
-                title: "Урок 2",
-                hebrewTitle: "שיעור שני",
-                desc: "Продовження вивчення алфавіту та огласовки.",
-                theory: [
-                    "Вивчення наступної групи літер івриту.",
-                    "Практика читання складів та простих слів."
-                ]
-            },
-            {
-                id: 3,
-                title: "Урок 3",
-                hebrewTitle: "שיעור שלישי",
-                desc: "Побудова простих фраз та привітання.",
-                theory: [
-                    "Поширені вітання на івриті (Шалом, Бoker tov тощо).",
-                    "Побудова найпростіших двоскладних речень."
-                ]
-            },
-            {
-                id: 4,
-                title: "Урок 4",
-                hebrewTitle: "שיעור רביעי",
-                desc: "Чоловічий та жіночий рід іменників.",
-                theory: [
-                    "Як визначати рід іменників в івриті.",
-                    "Закінчення однини чоловічого та жіночого роду (-а, -от, -ім)."
-                ]
-            },
-            {
-                id: 5,
-                title: "Урок 5",
-                hebrewTitle: "גּוּפִים וּמִלּוֹת יַחַס",
-                desc: "Особові займенники та злитні префікси-прийменники.",
-                theory: [
-                    "Особові займенники: ані (я), ата (ти), ху (він), хі (вона) тощо.",
-                    "Злитні префікси-прийменники (бе-, ле-, мі-)."
-                ]
-            },
-            {
-                id: 6,
-                title: "Урок 6",
-                hebrewTitle: "רְמִיזָה וּשְׁמוֹת תּוֹאַר",
-                desc: "Вказівні займенники та узгодження прикметників.",
-                theory: [
-                    "Вказівні займенники: зе (цей), зот (ця), еле (ці).",
-                    "Правила узгодження якісних прикметників з іменниками (наявність артикля 'ге-')."
-                ]
-            }
-        ];
-
         const container = document.getElementById("app-container");
 
         function renderList() {
+            if (typeof ivritCourses === "undefined" || !Array.isArray(ivritCourses)) {
+                container.innerHTML = `<div style="text-align:center; color:red; padding:20px;">Помилка: не вдалося знайти файл <code>lessons-data.js</code> у корені репозиторія.</div>`;
+                return;
+            }
+
             let html = "";
-            lessonsData.forEach(lesson => {
+            ivritCourses.forEach(lesson => {
+                let desc = (lesson.theory && lesson.theory[0]) ? lesson.theory[0] : "Інтерактивний урок івриту.";
                 html += `
                     <div class="lesson-card">
                         <h2>${lesson.title}</h2>
-                        <div class="hebrew-title">${lesson.hebrewTitle}</div>
-                        <p>${lesson.desc}</p>
+                        <div class="hebrew-title">${lesson.hebrewTitle || ''}</div>
+                        <p>${desc}</p>
                         <button class="btn" onclick="openLesson(${lesson.id})">Відкрити урок</button>
                     </div>
                 `;
@@ -237,20 +242,61 @@
         }
 
         function openLesson(id) {
-            const lesson = lessonsData.find(l => l.id === id);
+            const lesson = ivritCourses.find(l => l.id === id);
             if (!lesson) return;
 
-            let theoryHtml = lesson.theory.map(t => `<div class="theory-p">${t}</div>`).join("");
+            let theoryHtml = (lesson.theory || []).map(t => `<div class="theory-p">${t}</div>`).join("");
+            
+            let dialoguesHtml = (lesson.dialogues || []).map(d => `
+                <div class="dialogue-box">
+                    <div class="he-dialogue">${d.he || d.speaker1}</div>
+                    <div style="font-style: italic; color: #555; margin-top: 4px;">${d.tr || ''} — <b>${d.uk || d.translat1 || ''}</b></div>
+                </div>
+            `).join("");
+
+            let vocabRows = (lesson.vocabulary || []).map(v => `
+                <tr>
+                    <td class="he-col">${v.he}</td>
+                    <td><i>${v.tr}</i></td>
+                    <td>${v.uk}</td>
+                </tr>
+            `).join("");
+
+            let quizHtml = (lesson.quiz && lesson.quiz.length > 0) ? lesson.quiz.map((q, qIdx) => {
+                let opts = q.options.map((opt, oIdx) => 
+                    `<button class="quiz-opt" onclick="checkAns(this, ${oIdx === q.correct})">${opt}</button>`
+                ).join("");
+                return `
+                    <div class="quiz-item">
+                        <p><b>${qIdx + 1}. ${q.question}</b></p>
+                        <div>${opts}</div>
+                    </div>
+                `;
+            }).join("") : "<p>У цьому уроці тест у розробці.</p>";
 
             container.innerHTML = `
                 <button class="btn btn-gold" onclick="renderList()" style="margin-bottom: 20px;">← Назад до списку уроків</button>
                 
                 <div class="lesson-content-box">
-                    <h2 style="color: var(--jewish-blue);">${lesson.title}: ${lesson.desc}</h2>
-                    <div class="hebrew-title" style="font-size: 1.4rem; margin-bottom: 20px;">${lesson.hebrewTitle}</div>
+                    <h2 style="color: var(--jewish-blue); margin-bottom: 5px;">${lesson.title}</h2>
+                    <div class="hebrew-title" style="font-size: 1.3rem; margin-bottom: 15px;">${lesson.hebrewTitle || ''}</div>
+                    <p style="color: #666; margin-bottom: 20px;">⏱ Тривалість: ${lesson.duration || '90 хвилин'}</p>
                     
-                    <div class="section-title">✡ Теорія уроку</div>
+                    <div class="section-title">✡ Теорія та граматика</div>
                     ${theoryHtml}
+
+                    ${dialoguesHtml ? `<div class="section-title">💬 Діалоги та фрази</div>${dialoguesHtml}` : ''}
+
+                    ${vocabRows ? `
+                        <div class="section-title">📖 Словник уроку</div>
+                        <table>
+                            <thead><tr><th>Іврит</th><th>Транскрипція</th><th>Переклад</th></tr></thead>
+                            <tbody>${vocabRows}</tbody>
+                        </table>
+                    ` : ''}
+
+                    <div class="section-title">🧠 Контрольний тест</div>
+                    ${quizHtml}
                 </div>
 
                 <button class="btn btn-gold" onclick="renderList()" style="width: 100%; text-align: center;">← Назад до списку уроків</button>
@@ -258,7 +304,16 @@
             window.scrollTo(0, 0);
         }
 
-        // Запуск відображення при завантаженні сторінки
+        function checkAns(btn, isCorrect) {
+            const parent = btn.parentElement;
+            parent.querySelectorAll(".quiz-opt").forEach(b => b.disabled = true);
+            if (isCorrect) {
+                btn.classList.add("correct");
+            } else {
+                btn.classList.add("wrong");
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", renderList);
     </script>
 </body>
