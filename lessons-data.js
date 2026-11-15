@@ -2,7 +2,7 @@
 const ivritCourses = [
   {
     id: 1,
-    title: "УРОק 1: Алфавіт та огласівки",
+    title: "УРОК1: Алфавіт та огласівки",
     hebrewTitle: "אֲלֶף-בֵּית וְנִקּוּד",
     duration: "90 хвилин",
     theory: [
