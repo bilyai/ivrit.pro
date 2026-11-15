@@ -4,99 +4,133 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IVRIT PRO — Єврейська академія івриту</title>
-    <!-- Підключаємо гарний ізраїльський шрифт Assistant -->
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700;800&family=Frank+Ruhl+Libre:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --jewish-blue: #0038b8;
+            --jewish-dark-blue: #001c63;
             --jewish-gold: #c69214;
-            --bg-pergamum: #fcf6ec; /* Теплий пергаментний фон */
-            --card-border: #e6d2b5;
+            --jewish-light-gold: #e6c25b;
+            --bg-pergamum: #fbf5e8;
+            --card-bg: #fffdf9;
+            --border-tan: #dec7a1;
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Assistant', sans-serif;
             background-color: var(--bg-pergamum);
-            /* Додаємо ледь помітну текстуру традиційного фону */
-            background-image: radial-gradient(#e6d2b5 0.75px, transparent 0.75px);
-            background-size: 16px 16px;
-            color: #2c3e50;
-            margin: 0;
-            padding: 0;
+            background-image: 
+                radial-gradient(rgba(198, 146, 20, 0.12) 1px, transparent 1px),
+                radial-gradient(rgba(0, 56, 184, 0.06) 1px, var(--bg-pergamum) 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: #24292f;
+            line-height: 1.6;
+            padding-bottom: 50px;
         }
 
+        /* Шапка в стиле талита с золотым орнаментом и менорой */
         header {
-            background: linear-gradient(135deg, #001f6b, var(--jewish-blue));
+            background: linear-gradient(160deg, var(--jewish-dark-blue) 0%, var(--jewish-blue) 60%, #0047e0 100%);
             color: white;
             text-align: center;
-            padding: 35px 20px;
+            padding: 25px 20px 35px;
+            position: relative;
             border-bottom: 6px solid var(--jewish-gold);
-            border-radius: 0 0 25px 25px;
-            box-shadow: 0 6px 20px rgba(0, 56, 184, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 28, 99, 0.35);
+            overflow: hidden;
         }
 
-        .star-symbol {
-            font-size: 32px;
-            color: var(--jewish-gold);
+        /* Декоративные полосы талита сверху и снизу */
+        header::before {
+            content: "";
+            display: block;
+            height: 6px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--jewish-gold),
+                var(--jewish-gold) 20px,
+                transparent 20px,
+                transparent 28px
+            );
+            margin-bottom: 18px;
+            opacity: 0.85;
+        }
+
+        .jewish-emblems {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            font-size: 28px;
+            color: var(--jewish-light-gold);
             margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2.2rem;
-            letter-spacing: 2px;
-            font-weight: 700;
+        header h1 {
+            font-size: 2.3rem;
+            letter-spacing: 3px;
+            font-weight: 800;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
 
         header p {
-            margin-top: 8px;
+            margin-top: 6px;
             font-size: 1.1rem;
-            opacity: 0.95;
+            color: #f3e8c8;
             letter-spacing: 0.5px;
         }
 
+        .hebrew-motto {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.25rem;
+            color: var(--jewish-light-gold);
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
         .container {
-            max-width: 800px;
-            margin: 35px auto;
+            max-width: 820px;
+            margin: 30px auto;
             padding: 0 15px;
         }
 
+        /* Карточки уроков с двойной золотой рамкой */
         .lesson-card {
-            background: #ffffff;
+            background: var(--card-bg);
             border: 2px solid var(--jewish-gold);
-            border-radius: 16px;
+            outline: 4px solid var(--card-bg);
+            box-shadow: 0 0 0 5px rgba(198, 146, 20, 0.35), 0 8px 20px rgba(0, 56, 184, 0.08);
+            border-radius: 12px;
             padding: 24px;
-            margin-bottom: 22px;
-            box-shadow: 0 6px 18px rgba(198, 146, 20, 0.12);
+            margin-bottom: 28px;
             position: relative;
-            transition: transform 0.2s;
-        }
-
-        .lesson-card:hover {
-            transform: translateY(-2px);
         }
 
         .lesson-card::after {
             content: "✡";
             position: absolute;
-            top: 18px;
+            top: 16px;
             right: 20px;
             color: var(--jewish-blue);
-            font-size: 24px;
+            font-size: 26px;
             opacity: 0.85;
         }
 
         .lesson-card h2 {
             color: var(--jewish-blue);
-            font-size: 1.4rem;
-            margin-top: 0;
+            font-size: 1.35rem;
             margin-bottom: 6px;
-            padding-right: 30px;
+            padding-right: 35px;
+            font-weight: 700;
         }
 
         .hebrew-title {
-            font-size: 1.3rem;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.45rem;
             color: var(--jewish-gold);
             font-weight: 700;
             direction: rtl;
@@ -105,51 +139,77 @@
         }
 
         .btn {
-            background-color: var(--jewish-blue);
+            background: linear-gradient(135deg, var(--jewish-blue), var(--jewish-dark-blue));
             color: white;
-            border: none;
+            border: 1px solid var(--jewish-gold);
             padding: 11px 24px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 1rem;
             font-family: 'Assistant', sans-serif;
-            font-weight: 600;
-            text-decoration: none;
+            font-weight: 700;
             display: inline-block;
             margin-top: 12px;
-            box-shadow: 0 3px 10px rgba(0, 56, 184, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 56, 184, 0.25);
         }
 
-        .btn:hover {
-            background-color: #002a8c;
-        }
+        .btn:active { transform: scale(0.98); }
 
         .btn-gold {
-            background-color: var(--jewish-gold);
+            background: linear-gradient(135deg, #d6a11e, #b07f0c);
             color: #fff;
-            font-weight: 700;
+            border: none;
         }
-        .btn-gold:hover {
-            background-color: #b08110;
+
+        /* Кнопка голосовой озвучки */
+        .audio-btn {
+            background: #eef3ff;
+            border: 1.5px solid var(--jewish-blue);
+            color: var(--jewish-blue);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .audio-btn:hover, .audio-btn:active {
+            background: var(--jewish-blue);
+            color: white;
+            transform: scale(1.08);
         }
 
         .lesson-content-box {
-            background: #ffffff;
+            background: var(--card-bg);
             border: 2px solid var(--jewish-gold);
-            border-radius: 16px;
-            padding: 28px;
+            border-radius: 14px;
+            padding: 24px;
             margin-bottom: 25px;
-            box-shadow: 0 6px 18px rgba(198, 146, 20, 0.12);
+            box-shadow: 0 6px 20px rgba(198, 146, 20, 0.15);
+        }
+
+        .ornament-divider {
+            text-align: center;
+            color: var(--jewish-gold);
+            font-size: 1.2rem;
+            letter-spacing: 8px;
+            margin: 22px 0 10px;
         }
 
         .section-title {
             color: var(--jewish-blue);
             border-bottom: 2px solid var(--jewish-gold);
             padding-bottom: 8px;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            margin-top: 15px;
+            margin-bottom: 16px;
             font-size: 1.3rem;
-            font-weight: 700;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -157,117 +217,156 @@
 
         .theory-p {
             margin-bottom: 12px;
-            padding-left: 12px;
+            padding: 10px 14px;
+            background: #faf4e6;
             border-left: 4px solid var(--jewish-blue);
-            line-height: 1.6;
+            border-radius: 0 8px 8px 0;
             font-size: 1.05rem;
         }
 
         .dialogue-box {
-            background: #fdfaf4;
+            background: #fdf9f0;
             padding: 14px;
             border-radius: 10px;
             margin-bottom: 12px;
-            border-left: 4px solid var(--jewish-gold);
-            border-top: 1px solid var(--card-border);
-            border-right: 1px solid var(--card-border);
-            border-bottom: 1px solid var(--card-border);
+            border: 1px solid var(--border-tan);
+            border-right: 5px solid var(--jewish-gold);
+        }
+
+        .dialogue-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
         }
 
         .he-dialogue {
-            font-size: 1.3rem;
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--jewish-blue);
             direction: rtl;
             text-align: right;
+            flex-grow: 1;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 15px;
+            margin-top: 12px;
             background: #fff;
             border-radius: 8px;
             overflow: hidden;
+            border: 1px solid var(--border-tan);
         }
 
         th, td {
-            border: 1px solid var(--card-border);
-            padding: 10px 14px;
+            border: 1px solid var(--border-tan);
+            padding: 10px 10px;
             text-align: left;
+            vertical-align: middle;
         }
 
         th {
             background-color: var(--jewish-blue);
             color: white;
-            font-size: 1.05rem;
+            font-size: 1rem;
         }
 
         td.he-col {
+            font-family: 'Frank Ruhl Libre', serif;
             font-weight: 700;
             color: var(--jewish-blue);
             direction: rtl;
             text-align: right;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .quiz-item {
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px dashed var(--card-border);
+            border-bottom: 1px dashed var(--border-tan);
         }
 
         .quiz-opt {
             display: block;
             width: 100%;
             text-align: left;
-            padding: 10px 15px;
+            padding: 11px 15px;
             margin: 8px 0;
-            border: 1px solid var(--card-border);
+            border: 1.5px solid var(--border-tan);
             border-radius: 8px;
             background: #fff;
             cursor: pointer;
             font-family: 'Assistant', sans-serif;
             font-size: 1rem;
-            transition: all 0.2s;
-        }
-        .quiz-opt:hover {
-            background: #f4eee1;
-            border-color: var(--jewish-blue);
+            font-weight: 600;
         }
 
-        .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; font-weight: bold; }
+        .quiz-opt.correct { background: #d4edda; border-color: #28a745; color: #155724; }
         .quiz-opt.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; }
 
         footer {
             text-align: center;
-            color: #8c7b60;
+            color: #7d6b4f;
             margin-top: 40px;
             font-size: 0.95rem;
-            padding-bottom: 20px;
+            padding: 20px;
+            border-top: 2px solid var(--border-tan);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="star-symbol">✡</div>
+        <div class="jewish-emblems">
+            <span>✡</span>
+            <span>🕎</span>
+            <span>✡</span>
+        </div>
         <h1>IVRIT PRO</h1>
         <p>Єврейський академічний курс івриту</p>
+        <div class="hebrew-motto">בְּהַצְלָחָה בַּלִּימּוּדִים • Успіхів у навчанні</div>
     </header>
 
-    <div class="container" id="app-container">
-        <!-- Список уроків завантажиться автоматично -->
-    </div>
+    <div class="container" id="app-container"></div>
 
     <footer>
-        <p>&copy; 2026 IVRIT PRO. Усі права захищено.</p>
+        <div>✡ 🕎 ✡</div>
+        <p style="margin-top: 6px;">&copy; 2026 IVRIT PRO. Усі права захищено.</p>
     </footer>
 
-    <!-- Підключаємо твій файл з уроками з кореня -->
     <script src="lessons-data.js"></script>
     <script>
         const container = document.getElementById("app-container");
+
+        // Функція голосової озвучки івриту
+        function speakHebrew(text) {
+            if (!('speechSynthesis' in window)) {
+                alert("Ваш браузер не підтримує голосове озвучення.");
+                return;
+            }
+            window.speechSynthesis.cancel();
+            const cleanText = text.replace(/['"«»]/g, "");
+            const utterance = new SpeechSynthesisUtterance(cleanText);
+            utterance.lang = 'he-IL';
+            utterance.rate = 0.85;
+            
+            const voices = window.speechSynthesis.getVoices();
+            const hebrewVoice = voices.find(v => v.lang.includes('he') || v.lang.includes('iw'));
+            if (hebrewVoice) {
+                utterance.voice = hebrewVoice;
+            }
+            window.speechSynthesis.speak(utterance);
+        }
+
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+        }
+
+        function escapeQuotes(str) {
+            return (str || "").replace(/'/g, "\\'").replace(/"/g, "&quot;");
+        }
 
         function renderList() {
             if (typeof ivritCourses === "undefined" || !Array.isArray(ivritCourses)) {
@@ -283,7 +382,7 @@
                         <h2>${lesson.title}</h2>
                         <div class="hebrew-title">${lesson.hebrewTitle || ''}</div>
                         <p style="color: #444; font-size: 1.05rem;">${desc}</p>
-                        <button class="btn" onclick="openLesson(${lesson.id})">Відкрити урок</button>
+                        <button class="btn" onclick="openLesson(${lesson.id})">Відкрити урок ✡</button>
                     </div>
                 `;
             });
@@ -297,15 +396,40 @@
 
             let theoryHtml = (lesson.theory || []).map(t => `<div class="theory-p">${t}</div>`).join("");
             
-            let dialoguesHtml = (lesson.dialogues || []).map(d => `
-                <div class="dialogue-box">
-                    <div class="he-dialogue">${d.he || d.speaker1}</div>
-                    <div style="font-style: italic; color: #555; margin-top: 6px; font-size: 1rem;">${d.tr || ''} — <b>${d.uk || d.translat1 || ''}</b></div>
-                </div>
-            `).join("");
+            let dialoguesHtml = (lesson.dialogues || []).map(d => {
+                const he1 = d.he || d.speaker1 || "";
+                const tr1 = d.tr || d.trans1 || "";
+                const uk1 = d.uk || d.translat1 || "";
+
+                let block = `
+                    <div class="dialogue-box">
+                        <div class="dialogue-top">
+                            <button class="audio-btn" title="Прослухати" onclick="speakHebrew('${escapeQuotes(he1)}')">🔊</button>
+                            <div class="he-dialogue">${he1}</div>
+                        </div>
+                        <div style="font-style: italic; color: #555; margin-top: 6px; font-size: 1rem;">${tr1} — <b>${uk1}</b></div>
+                `;
+
+                if (d.speaker2) {
+                    block += `
+                        <hr style="margin: 10px 0; border: 0; border-top: 1px dashed #dec7a1;">
+                        <div class="dialogue-top">
+                            <button class="audio-btn" title="Прослухати" onclick="speakHebrew('${escapeQuotes(d.speaker2)}')">🔊</button>
+                            <div class="he-dialogue">${d.speaker2}</div>
+                        </div>
+                        <div style="font-style: italic; color: #555; margin-top: 6px; font-size: 1rem;">${d.trans2 || ''} — <b>${d.translat2 || ''}</b></div>
+                    `;
+                }
+
+                block += `</div>`;
+                return block;
+            }).join("");
 
             let vocabRows = (lesson.vocabulary || []).map(v => `
                 <tr>
+                    <td style="width: 48px; text-align: center;">
+                        <button class="audio-btn" title="Прослухати" onclick="speakHebrew('${escapeQuotes(v.he)}')">🔊</button>
+                    </td>
                     <td class="he-col">${v.he}</td>
                     <td><i>${v.tr}</i></td>
                     <td>${v.uk}</td>
@@ -319,6 +443,11 @@
                 return `
                     <div class="quiz-item">
                         <p><b>${qIdx + 1}. ${q.question}</b></p>
+                        ${q.hebrew ? `
+                            <div style="display:flex; align-items:center; justify-content:flex-end; gap:10px; margin:8px 0;">
+                                <span class="he-dialogue" style="font-size:1.25rem;">${q.hebrew}</span>
+                                <button class="audio-btn" onclick="speakHebrew('${escapeQuotes(q.hebrew)}')">🔊</button>
+                            </div>` : ''}
                         <div>${opts}</div>
                     </div>
                 `;
@@ -328,28 +457,44 @@
                 <button class="btn btn-gold" onclick="renderList()" style="margin-bottom: 20px;">← Назад до списку уроків</button>
                 
                 <div class="lesson-content-box">
-                    <h2 style="color: var(--jewish-blue); margin-bottom: 5px; font-size: 1.5rem;">${lesson.title}</h2>
-                    <div class="hebrew-title" style="font-size: 1.4rem; margin-bottom: 15px;">${lesson.hebrewTitle || ''}</div>
-                    <p style="color: #666; margin-bottom: 25px; font-weight: 600;">⏱ Тривалість: ${lesson.duration || '90 хвилин'}</p>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px;">
+                        <h2 style="color: var(--jewish-blue); margin-bottom: 5px; font-size: 1.5rem;">${lesson.title}</h2>
+                        <span style="font-size: 26px; color: var(--jewish-gold);">🕎</span>
+                    </div>
+                    <div class="hebrew-title" style="font-size: 1.5rem; margin-bottom: 12px;">${lesson.hebrewTitle || ''}</div>
+                    <p style="color: #666; margin-bottom: 20px; font-weight: 600;">⏱ Тривалість: ${lesson.duration || '90 хвилин'}</p>
                     
                     <div class="section-title">✡ Теорія та граматика</div>
                     ${theoryHtml}
 
-                    ${dialoguesHtml ? `<div class="section-title">💬 Діалоги та фрази</div>${dialoguesHtml}` : ''}
+                    ${dialoguesHtml ? `
+                        <div class="ornament-divider">• ✡ •</div>
+                        <div class="section-title">🔊 Діалоги та фрази</div>
+                        ${dialoguesHtml}
+                    ` : ''}
 
                     ${vocabRows ? `
+                        <div class="ornament-divider">• ✡ •</div>
                         <div class="section-title">📖 Словник уроку</div>
                         <table>
-                            <thead><tr><th>Іврит</th><th>Транскрипція</th><th>Переклад</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th style="text-align:center;">Звук</th>
+                                    <th style="text-align:right;">Іврит</th>
+                                    <th>Транскрипція</th>
+                                    <th>Переклад</th>
+                                </tr>
+                            </thead>
                             <tbody>${vocabRows}</tbody>
                         </table>
                     ` : ''}
 
+                    <div class="ornament-divider">• ✡ •</div>
                     <div class="section-title">🧠 Контрольний тест</div>
                     ${quizHtml}
                 </div>
 
-                <button class="btn btn-gold" onclick="renderList()" style="width: 100%; text-align: center; padding: 12px;">← Назад до списку уроків</button>
+                <button class="btn btn-gold" onclick="renderList()" style="width: 100%; text-align: center; padding: 14px;">← Назад до списку уроків</button>
             `;
             window.scrollTo(0, 0);
         }
