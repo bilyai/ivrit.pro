@@ -656,7 +656,6 @@ const ivritCourses = [
     }
   ]
 },
-  ```javascript
 {
   id: 7,
   title: "УРОК 7: Мій день",
