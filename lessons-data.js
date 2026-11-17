@@ -1820,4 +1820,5 @@ const ivritCourses = [
     }
   ]
 }
+
 ];
