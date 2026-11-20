@@ -1,4 +1,3 @@
-Lessons data · JS
 // IVRIT PRO — дані уроків: 15 уроків (версія 2026-11-20)
 const ivritCourses = [
  {
